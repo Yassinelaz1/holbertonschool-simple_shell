@@ -14,7 +14,10 @@ int main(void)
 
 void display_prompt(void)
 {
-	printf("$ ");
+	if (isatty(STDIN_FILENO))
+	{
+		printf("$ ");
+	}
 }
 
 void user_input(char **command)
