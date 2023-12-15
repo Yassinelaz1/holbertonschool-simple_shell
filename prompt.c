@@ -28,7 +28,6 @@ void user_input(char **command)
 	{
 		if (feof(stdin))
 		{
-			printf("\n");
 			exit(EXIT_SUCCESS);
 		}
 		else
