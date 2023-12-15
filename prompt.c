@@ -51,7 +51,8 @@ void execute_command(char *command)
 		/* filston process*/
 		char *token = strtok(command, " ");
 		char **args = (char **)malloc(2 * sizeof(char *));
-		int i = 0;
+		int i= 0;
+		int j ;
 
 		while (token != NULL)
 		{
@@ -65,7 +66,7 @@ void execute_command(char *command)
 		perror("$");
 
 		/*Free allocated memory in the filston process*/
-		for (int j = 0; args[j] != NULL; ++j)
+		for (j = 0; args[j] != NULL; ++j)
 		{
 			free(args[j]);
 		}
