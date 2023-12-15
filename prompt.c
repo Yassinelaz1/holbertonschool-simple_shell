@@ -36,7 +36,6 @@ void user_input(char **command)
 			exit(EXIT_FAILURE);
 		}
 	}
-	free(command);
 
 	(*command)[strcspn(*command, "\n")] = '\0'; /*Remove newline*/
 }
@@ -62,7 +61,7 @@ void execute_command(char *command)
 			args[i++] = strdup(token);
 			token = strtok(NULL, " ");
 		}
-
+		free(token);
 		args[i] = NULL; /*Null-terminate the argument list*/
 
 		execve(args[0], args, NULL);
