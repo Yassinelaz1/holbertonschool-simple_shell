@@ -36,9 +36,9 @@ void user_input(char **command)
 			exit(EXIT_FAILURE);
 		}
 	}
+	free(command);
 
 	(*command)[strcspn(*command, "\n")] = '\0'; /*Remove newline*/
-	free(command);
 }
 
 void execute_command(char *command)
