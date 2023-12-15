@@ -1,8 +1,8 @@
 #include "shell.h"
 int main(void) 
 {
-	char *command = NULL; //command = null
-	while (1)//main loop 
+	char *command = NULL; /*command = null*/
+	while (1)/*main loop */
 	{
 		display_prompt();
 		user_input(&command);
@@ -35,7 +35,7 @@ void user_input(char **command)
 		}
 	}
 
-	(*command)[strcspn(*command, "\n")] = '\0'; // Remove newline
+	(*command)[strcspn(*command, "\n")] = '\0'; /*Remove newline*/
 }
 
 void execute_command(char *command)
@@ -48,7 +48,7 @@ void execute_command(char *command)
 	}
 	else if (child_pid == 0)
 	{
-		// filston process
+		/* filston process*/
 		char *token = strtok(command, " ");
 		char **args = (char **)malloc(2 * sizeof(char *));
 		int i = 0;
@@ -59,12 +59,12 @@ void execute_command(char *command)
 			token = strtok(NULL, " ");
 		}
 
-		args[i] = NULL; // Null-terminate the argument list
+		args[i] = NULL; /*Null-terminate the argument list*/
 
 		execve(args[0], args, NULL);
 		perror("$");
 
-		// Free allocated memory in the filston process
+		/*Free allocated memory in the filston process*/
 		for (int j = 0; args[j] != NULL; ++j)
 		{
 			free(args[j]);
@@ -75,7 +75,7 @@ void execute_command(char *command)
 	}
 	else
 	{
-		// Papa process
+		/*Papa process*/
 		int status;
 		waitpid(child_pid, &status, 0);
 	}
