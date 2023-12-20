@@ -3,8 +3,10 @@ char *display_prompt(void)
 {
     size_t size = 0;
     int r;
+
     char *buf;
-    printf("$ ");
+    if (isatty(STDIN_FILENO))
+        write(STDOUT_FILENO, "$ ", 2);
     r = getline(&buf, &size, stdin);
     if (r == -1)
     {
@@ -63,6 +65,7 @@ int execute_command(char **command, char **argv, char **env)
 {
     pid_t child_pid = fork();
     int stat;
+    int i;
 
     if (child_pid == 0)
     {
@@ -76,6 +79,12 @@ int execute_command(char **command, char **argv, char **env)
     else
     {
         waitpid(child_pid, &stat, 0);
+        for (i = 0; command[i]; i++)
+        {
+            free(command[i]);
+            command[i] = NULL;
+        }
+        free(command);
     }
     return (1);
 }
