@@ -13,8 +13,6 @@ int main(int argc, char **argv, char **env)
         line = display_prompt();
         if (line == NULL)
 		{
-			if (isatty(STDIN_FILENO))
-				write(STDOUT_FILENO, "\n", 1);
 			return (stat);
 		}
         command = split_line(line);
