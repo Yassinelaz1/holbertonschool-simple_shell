@@ -78,12 +78,6 @@ int execute_command(char **command, char **argv, char **env)
     else
     {
         waitpid(child_pid, &stat, 0);
-        for (i = 0; command[i]; i++)
-        {
-            free(command[i]);
-            command[i] = NULL;
-        }
-        free(command);
     }
     return (1);
 }
