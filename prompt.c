@@ -10,7 +10,6 @@ char *display_prompt(void)
     r = getline(&buf, &size, stdin);
     if (r == -1)
     {
-        printf("\n");
         free(buf);
         exit(EXIT_SUCCESS);
     }
