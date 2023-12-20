@@ -1,17 +1,23 @@
 #include "shell.h"
-int main(void) 
+int main(int argc, char **argv, char **env)
 {
-    char *command = NULL;
+    char *line = NULL;
+    char **command = NULL;
+    int stat;
+    (void)argc;
+    
     while (1)
     {
-        display_prompt();
-        user_input(&command);
-        if (!command)
+        line = display_prompt();
+        command = split_line(line);
+        /*for ( i = 0; command[i]; i++)
         {
-            continue;
+            printf("%s\n", command[i]);
+            free(command[i]), command[i]=NULL;
         }
-        execute_command(command);
-        free(command);
+        free(command);*/
+        stat = execute_command(command, argv, env);
+       
     }
-    return 0;
+     return (stat);
 }

@@ -1,73 +1,81 @@
 #include "shell.h"
-void display_prompt(void)
-{
-    printf("$ ");
-}
-
-void user_input(char **command)
+char *display_prompt(void)
 {
     size_t size = 0;
-
-    if (getline(command, &size, stdin) == -1)
+    int r;
+    char *buf;
+    printf("$ ");
+    r = getline(&buf, &size, stdin);
+    if (r == -1)
     {
-        if (*command == NULL)
-        {
-            exit(EXIT_SUCCESS);
-        }
-        else
-        {
-            perror("getline");
-            exit(EXIT_FAILURE);
-        }
+        printf("\n");
+        free(buf);
+        exit(EXIT_SUCCESS);
     }
-
-    (*command)[strcspn(*command, "\n")] = '\0'; /* Remove newline */
+    return (buf);
 }
 
-void execute_command(char *command)
+char **split_line(char *line)
+{
+    char **command = NULL;
+    char *token = NULL, *tmp = NULL;
+    int compt = 0;
+    int i = 0;
+
+    if (!line)
+        return (NULL);
+    tmp = strdup(line);
+    token = strtok(tmp, DELIM);
+    if (!token)
+    {
+        free(line), line = NULL;
+        free(tmp), tmp = NULL;
+        return (NULL);
+    }
+
+    while (token)
+    {
+        compt++;
+        token = strtok(NULL, DELIM);
+    }
+    free(tmp), tmp = NULL;
+    command = malloc(sizeof(char *) * (compt + 1));
+    if (!command)
+    {
+        free(line);
+        line = NULL;
+        return (NULL);
+    }
+
+    token = strtok(line, DELIM);
+    while (token)
+    {
+        command[i] = strdup(token);
+        token = strtok(NULL, DELIM);
+        i++;
+    }
+    free(line), line = NULL;
+    command[i] = NULL;
+    return (command);
+}
+
+int execute_command(char **command, char **argv, char **env)
 {
     pid_t child_pid = fork();
-    if (child_pid == -1)
+    int stat;
+
+    if (child_pid == 0)
     {
-        perror("fork");
-        exit(EXIT_FAILURE);
-    }
-    else if (child_pid == 0)
-    {
-        /* Child process */
-        char *token = strtok(command, " ");
-        char **args = (char **)malloc(2 * sizeof(char *));
-        int i = 0;
-		int j;
-
-        while (token != NULL)
+        if (execve(command[0], command, env) == -1)
         {
-            args[i++] = strdup(token);
-            token = strtok(NULL, " ");
+            perror(argv[0]);
+            exit(127);
         }
-
-        args[i] = NULL; /* Null-terminate the argument list */
-
-        execvp(args[0], args);
-        perror("$");
-
-        /* Free allocated memory in the child process */
-        for (j = 0; args[j] != NULL; ++j)
-        {
-            free(args[j]);
-        }
-        free(args);
-
-        exit(EXIT_FAILURE);
     }
+
     else
     {
-        /* Parent process */
-        int status;
-        if (waitpid(child_pid, &status, 0) == -1)
-        {
-            perror("waitpid");
-            exit(EXIT_FAILURE);
-        }
+        waitpid(child_pid, &stat, 0);
     }
+    return (1);
 }
