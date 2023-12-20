@@ -21,7 +21,6 @@ char **split_line(char *line)
     char **command = NULL;
     char *token = NULL, *tmp = NULL;
     int compt = 0;
-    int i = 0;
 
     if (!line)
         return (NULL);
