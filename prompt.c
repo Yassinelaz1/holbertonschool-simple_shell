@@ -21,6 +21,7 @@ char **split_line(char *line)
     char **command = NULL;
     char *token = NULL, *tmp = NULL;
     int compt = 0;
+    int i = 0;
 
     if (!line)
         return (NULL);
@@ -63,7 +64,6 @@ int execute_command(char **command, char **argv, char **env)
 {
     pid_t child_pid = fork();
     int stat;
-    int i;
 
     if (child_pid == 0)
     {
