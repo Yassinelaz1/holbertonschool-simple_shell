@@ -41,10 +41,11 @@ char *handle_path(char *command)
 
 			path = strtok(NULL, ":");
 		}
-
+		else
+		{
 			free(path_env);
 			return NULL;
-	
+		}
 	}
 	free(path_env);
 	return NULL;
