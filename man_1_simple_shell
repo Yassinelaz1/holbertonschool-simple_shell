@@ -2,7 +2,8 @@ man_1_simple_shell(1)                  User Commands                  SIMPLE SHE
 
 NAME
        simple-shell - a simple command-line shell
-
+EXECUTE
+ (man) man_shell
 SYNOPSIS
        simple-shell 
 
