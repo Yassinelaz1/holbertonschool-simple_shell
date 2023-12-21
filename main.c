@@ -21,7 +21,10 @@ int main(int argc, char **argv, char **environ)
         command = split_line(line);
         if (!command)
             continue;
-        stat = execute_command(command, argv, environ,indx);
+        if (is_built_in(command) == 1)
+            handle_built_in(command, &stat);
+        else
+            stat = execute_command(command, argv, environ, indx);
     }
     return (stat);
 }
