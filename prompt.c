@@ -1,8 +1,13 @@
 #include "shell.h"
+/**
+ *
+ *
+ *
+ */
 char *display_prompt(void)
 {
     size_t size = 0;
-    int r;
+    ssize_t r;
 
     char *buf;
     if (isatty(STDIN_FILENO))
@@ -11,11 +16,16 @@ char *display_prompt(void)
     if (r == -1)
     {
         free(buf);
-        exit(EXIT_SUCCESS);
+        return NULL;
     }
     return (buf);
 }
 
+/**
+ *
+ *
+ *
+ */
 char **split_line(char *line)
 {
     char **command = NULL;
@@ -60,23 +70,42 @@ char **split_line(char *line)
     return (command);
 }
 
-int execute_command(char **command, char **argv, char **env)
+/**
+ *
+ *
+ *
+ */
+int execute_command(char **command, char **argv, char **environ, int indx)
 {
-    pid_t child_pid = fork();
+    char *fullcmd;
     int stat;
+    pid_t child_pid;
 
+
+    fullcmd = handle_path(command[0]);
+    if (!fullcmd)
+    {
+
+        fprintf(stderr, "%s: %d: %s: not found\n", argv[0], indx, command[0]);
+        freearray(command);
+        return (127);
+    }
+    child_pid = fork();
     if (child_pid == 0)
     {
-        if (execve(command[0], command, env) == -1)
+        if (execve(fullcmd, command, environ) == -1)
         {
-            perror(argv[0]);
-            exit(127);
+
+            free(fullcmd);
+            freearray(command);
         }
     }
 
     else
     {
         waitpid(child_pid, &stat, 0);
+        freearray(command);
+        free(fullcmd);
     }
-    return (1);
+    return (WEXITSTATUS(stat));
 }

@@ -1,10 +1,10 @@
 #include "shell.h"
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv, char **environ)
 {
     char *line = NULL;
     char **command = NULL;
     int stat;
-    int i = 0;
+    int indx = 0;
 
     (void)argc;
 
@@ -17,15 +17,11 @@ int main(int argc, char **argv, char **env)
                 write(STDOUT_FILENO, "\n", 1);
             return (stat);
         }
+        indx++;
         command = split_line(line);
-
-        stat = execute_command(command, argv, env);
-        for (i = 0; command[i]; i++)
-        {
-            free(command[i]);
-            command[i] = NULL;
-        }
-        free(command);
+        if (!command)
+            continue;
+        stat = execute_command(command, argv, environ,indx);
     }
     return (stat);
 }
