@@ -22,4 +22,8 @@ int execute_command(char **command, char **argv, char **environ , int indx);
 char *_getenv(char *variable);
 char *handle_path(char *command);
 
+int is_built_in(char **command);
+void handle_built_in(char **command, int *status);
+void hsh_exit(char **cmd, int *status);
+void hsh_env(char **cmd, int *status);
 #endif
