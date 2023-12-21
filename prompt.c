@@ -8,7 +8,7 @@ char *display_prompt(void)
 {
     size_t size = 0;
     ssize_t r;
-    char *buf;
+    char *buf = NULL;
 
     if (isatty(STDIN_FILENO))
         write(STDOUT_FILENO, "$ ", 2);

@@ -11,12 +11,14 @@ char *handle_path(char *command)
 		if (command[i] == '/')
 		{
 			if (stat(command, &buf) == 0)
-				return strdup(command);
+				return (strdup(command));
 
-			return NULL;
+			return (NULL);
 		}
 	}
 	path_env = _getenv("PATH");
+	if (!path_env)
+		return (NULL);
 	path = strtok(path_env, ":");
 	while (path)
 	{
@@ -35,14 +37,14 @@ char *handle_path(char *command)
 			}
 
 			free(fullcmd);
+			fullcmd = NULL;
 
 			path = strtok(NULL, ":");
 		}
-		else
-		{
+
 			free(path_env);
 			return NULL;
-		}
+	
 	}
 	free(path_env);
 	return NULL;
