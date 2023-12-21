@@ -10,7 +10,8 @@ char *display_prompt(void)
     ssize_t r;
     char *buf;
 
-    printf("$ ");
+    if (isatty(STDIN_FILENO))
+        write(STDOUT_FILENO, "$ ", 2);
     r = getline(&buf, &size, stdin);
     if (r == -1)
     {
@@ -103,7 +104,8 @@ int execute_command(char **command, char **argv, char **environ, int indx)
     {
         waitpid(child_pid, &stat, 0);
         freearray(command);
-        free(fullcmd); fullcmd=NULL;
+        free(fullcmd);
+        fullcmd = NULL;
     }
     return (WEXITSTATUS(stat));
 }
