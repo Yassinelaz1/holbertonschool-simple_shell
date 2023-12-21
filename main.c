@@ -15,7 +15,7 @@ int main(int argc, char **argv, char **environ)
         {
             if (isatty(STDIN_FILENO))
                 write(STDOUT_FILENO, "\n", 1);
-            return (stat);
+            return (EXIT_SUCCESS);
         }
         indx++;
         command = split_line(line);

@@ -8,10 +8,9 @@ char *display_prompt(void)
 {
     size_t size = 0;
     ssize_t r;
-
     char *buf;
-    if (isatty(STDIN_FILENO))
-        write(STDOUT_FILENO, "$ ", 2);
+
+    printf("$ ");
     r = getline(&buf, &size, stdin);
     if (r == -1)
     {
@@ -81,7 +80,6 @@ int execute_command(char **command, char **argv, char **environ, int indx)
     int stat;
     pid_t child_pid;
 
-
     fullcmd = handle_path(command[0]);
     if (!fullcmd)
     {
@@ -97,15 +95,15 @@ int execute_command(char **command, char **argv, char **environ, int indx)
         {
 
             free(fullcmd);
+            fullcmd = NULL;
             freearray(command);
         }
     }
-
     else
     {
         waitpid(child_pid, &stat, 0);
         freearray(command);
-        free(fullcmd);
+        free(fullcmd); fullcmd=NULL;
     }
     return (WEXITSTATUS(stat));
 }
