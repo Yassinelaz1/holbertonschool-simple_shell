@@ -1,0 +1,61 @@
+man_1_simple_shell(1)                  User Commands                  SIMPLE SHELL(1)
+
+NAME
+       simple-shell - a simple command-line shell
+
+SYNOPSIS
+       simple-shell 
+
+DESCRIPTION
+       simple-shell is a minimalistic command-line shell that provides basic
+       functionality for executing commands. It supports simple command
+       execution and basic shell features.
+
+COMMANDS
+       Simple shell supports the following commands:
+
+       command [ARGUMENTS...]
+              Execute the specified command with the given arguments.
+
+       cd [DIRECTORY]
+              Change the current working directory. If no directory is
+              provided, the shell goes to the user's home directory.
+
+       exit [STATUS]
+              Exit the shell with the optional exit status (default is 0).
+               - cd: Change directory.
+
+       - ls: List directory contents.
+
+       - pwd: Print current working directory.
+
+       - echo: Display a message.
+
+
+
+EXAMPLES
+       To execute a command:
+              $ simple-shell command arg1 arg2
+
+       To change the current directory:
+              $ simple-shell cd /path/to/directory
+
+       To exit the shell:
+              $ simple-shell exit
+
+       To display version information:
+              $ simple-shell --version
+
+AUTHOR
+       Written by Yassine Lazhari.
+
+REPORTING BUGS
+       Report bugs to yassinelazhari976@gmail.com
+
+SEE ALSO
+       More information about simple-shell can be found at:
+       https://github.com/Yassinelaz1
+
+COPYRIGHT
+       This is free software: you are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
