@@ -4,13 +4,11 @@ Simple Shell is a minimalistic command-line shell that provides basic functional
 
 ## Table of Contents
 - [Installation](#installation)
-- [Usage](#usage)
 - [Commands](#commands)
 - [Examples](#examples)
 - [Author](#author)
 - [Reporting Bugs](#reporting-bugs)
 - [See Also](#see-also)
-- [License](#license)
 
 ## Installation
 Clone the repository from [GitHub](https://github.com/Yassinelaz1) and follow the installation instructions in the README.
