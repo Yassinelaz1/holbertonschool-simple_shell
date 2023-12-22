@@ -46,4 +46,7 @@ Report bugs to yassinelazhari976@gmail.com.
 
 ## See Also
 More information about Simple Shell can be found at GitHub.
-![Alt text](https://drive.google.com/file/d/186DFTVVYNU27Mv1jmIljQemXw0Q_KvPZ/view?usp=sharing)
+
+## Flowchart
+
+![Capture d'écran 2023-12-22 003638](https://github.com/Yassinelaz1/holbertonschool-simple_shell/assets/146721050/1f8f5ef3-5bb1-4870-b8b1-5dc7e125f707)
