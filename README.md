@@ -46,5 +46,4 @@ Report bugs to yassinelazhari976@gmail.com.
 
 ## See Also
 More information about Simple Shell can be found at GitHub.
-
-![Alt text](file:///C:/Users/MSI/Pictures/Screenshots/Capture%20d'%C3%A9cran%202023-12-22%20003638.png)
+![Alt text](https://drive.google.com/file/d/186DFTVVYNU27Mv1jmIljQemXw0Q_KvPZ/view?usp=sharing)
